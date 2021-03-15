@@ -1,0 +1,11 @@
+[act]
+
+orderly -max-start-tokens 5 -start-tokens-per-second 0.2 -- -name sv -wait-started-timeout 1.1 -run @[EXACTLY_HOME]@/sv -wait-started @[EXACTLY_HOME]@/sv
+
+[assert]
+
+exit-code != 0
+
+stdout
+  -transformed-by grep ^sv
+    equals -contents-of test.expected

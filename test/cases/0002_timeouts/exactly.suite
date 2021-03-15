@@ -1,0 +1,9 @@
+[cases]
+
+*.case
+
+[setup]
+
+including ../common.xly
+
+def list common_args = -check-delay 60 -max-start-tokens 1 -start-tokens-per-second 0 -- -name sv -all-commands @[EXACTLY_HOME]@/sv

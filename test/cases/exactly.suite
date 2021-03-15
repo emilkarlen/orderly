@@ -1,0 +1,10 @@
+[suites]
+
+0001_start_shutdown
+0002_timeouts
+0003_nested
+0004_rate_limit_abort
+0005_child_ignores_sigterm
+0006_dies_during_wait_started
+0007_orderly_lifecycle
+0008_child_signal_orderly

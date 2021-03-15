@@ -1,0 +1,24 @@
+[act]
+
+
+@[EXACTLY_ACT_HOME]@/orderly \
+  -check-delay 60 -- \
+  -name sv1 -all-commands @[EXACTLY_HOME]@/sv \
+   -- \
+  -name sv2 -all-commands @[EXACTLY_HOME]@/sv \
+   -- \
+  -name sv3 -all-commands @[EXACTLY_HOME]@/sv &
+
+pid="$!"
+sleep 1
+/bin/kill -SIGINT "$pid"
+wait
+
+
+[assert]
+
+exit-code == 0
+
+stdout
+  -transformed-by grep ^sv
+    equals -contents-of test.expected

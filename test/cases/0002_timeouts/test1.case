@@ -1,0 +1,15 @@
+[setup]
+
+env -of act TIMEOUT_ACTION = "WAIT_STARTED"
+
+[act]
+
+orderly @[common_args]@ -wait-started-timeout 2
+
+[assert]
+
+exit-code != 0
+
+stdout
+  -transformed-by grep ^sv
+    equals -contents-of test1.expected

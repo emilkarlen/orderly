@@ -1,0 +1,37 @@
+[conf]
+
+actor = source % sh
+
+[setup]
+
+timeout = 60
+
+env -of !act start_time = -stdout-from % date +%s
+
+[act]
+
+
+@[EXACTLY_ACT_HOME]@/orderly -- \
+  -name sv -run @[EXACTLY_HOME]@/sv -terminate-timeout 3 &
+
+pid="$!"
+sleep 1
+/bin/kill -SIGINT "$pid"
+wait
+
+
+[before-assert]
+
+env test_duration = -stdout-from $ echo $(($(date +%s) - start_time))
+
+[assert]
+
+exit-code == 0
+
+`Execution time should be > 2 seconds`
+
+$ test "$test_duration" -gt 2
+
+`Execution time should be < 6 seconds`
+
+$ test "$test_duration" -lt 6

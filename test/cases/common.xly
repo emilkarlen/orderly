@@ -1,0 +1,7 @@
+[conf]
+
+act-home = ../../target/debug
+
+[setup]
+
+timeout = 60

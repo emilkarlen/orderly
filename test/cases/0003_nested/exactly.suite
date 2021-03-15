@@ -1,0 +1,9 @@
+[cases]
+
+*.case
+
+[conf]
+
+including ../common.xly
+
+actor = source % sh

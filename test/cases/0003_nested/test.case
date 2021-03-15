@@ -1,0 +1,29 @@
+[setup]
+
+env BIN_DIR     = "@[EXACTLY_ACT_HOME]@"
+env SCRIPTS_DIR = "@[EXACTLY_HOME]@"
+
+[act]
+
+@[EXACTLY_ACT_HOME]@/orderly \
+  -check-delay 60 -- \
+  -name sv1 -all-commands @[EXACTLY_HOME]@/sv \
+  -- \
+  -name sv2 -all-commands @[EXACTLY_HOME]@/sv \
+  -- \
+  -name nested -all-commands @[EXACTLY_HOME]@/nested-xly \
+  -- \
+  -name sv4 -all-commands @[EXACTLY_HOME]@/sv &
+
+pid="$!"
+sleep 5
+/bin/kill -SIGINT "$pid"
+wait
+
+[assert]
+
+exit-code == 0
+
+stdout
+  -transformed-by grep ^sv
+    equals -contents-of test.expected

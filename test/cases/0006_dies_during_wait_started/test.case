@@ -1,0 +1,21 @@
+[setup]
+
+timeout = 10
+
+env -of !act start_time = -stdout-from % date +%s
+
+[act]
+
+orderly -max-start-tokens 1 -start-tokens-per-second 0 -- -name sv -all-commands @[EXACTLY_HOME]@/sv
+
+[before-assert]
+
+env test_duration = -stdout-from $ echo $(($(date +%s) - start_time))
+
+[assert]
+
+exit-code != 0
+
+`Execution time should be less than 5 seconds`
+
+$ test "$test_duration" -lt 5

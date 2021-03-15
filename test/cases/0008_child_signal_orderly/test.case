@@ -1,0 +1,11 @@
+[act]
+
+orderly -max-start-tokens 1 -start-tokens-per-second 0 -- -name sv -all-commands @[EXACTLY_HOME]@/sv
+
+[assert]
+
+exit-code == 0
+
+stdout
+  -transformed-by grep ^sv
+    equals -contents-of test.expected

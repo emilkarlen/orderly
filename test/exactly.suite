@@ -1,0 +1,15 @@
+# Test suite for Exactly.
+#
+# To run the suite:
+#
+# > exactly suite <path of this file>
+#
+# To install Exactly:
+#
+# > pip3 install exactly
+#
+# (Requires Python >= 3.6)
+
+[suites]
+
+cases

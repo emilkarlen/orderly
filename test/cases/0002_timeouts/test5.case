@@ -1,0 +1,25 @@
+[conf]
+
+actor = source % sh
+
+[setup]
+
+env -of act SHUTDOWN_NOOP = "yes"
+env -of act TIMEOUT_ACTION = "SHUTDOWN"
+
+[act]
+
+@[EXACTLY_ACT_HOME]@/orderly @[common_args]@ -shutdown-timeout 2 &
+
+pid="$!"
+sleep 1
+/bin/kill -SIGINT "$pid"
+wait
+
+[assert]
+
+exit-code == 0
+
+stdout
+  -transformed-by grep ^sv
+    equals -contents-of test5.expected

@@ -1,0 +1,20 @@
+[setup]
+
+env -of act TIMEOUT_ACTION = "CLEANUP"
+
+[act]
+
+orderly @[common_args]@ -cleanup-timeout 2
+
+[assert]
+
+exit-code != 0
+
+# This test has a slightly strange expected result.
+# First the initial cleanup fails causing a shutdown,
+# next the shutdown fails, causing a kill,
+# finally the kill fails, and we exit anyway.
+
+stdout
+  -transformed-by grep ^sv
+    equals -contents-of test3.expected

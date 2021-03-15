@@ -1,0 +1,15 @@
+[setup]
+
+env -of act TIMEOUT_ACTION = "CHECK"
+
+[act]
+
+orderly @[common_args]@ -check-timeout 2
+
+[assert]
+
+exit-code != 0
+
+stdout
+  -transformed-by grep ^sv
+    equals -contents-of test2.expected
