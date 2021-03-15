@@ -22,4 +22,4 @@ exit-code == 0
 
 stdout
   -transformed-by grep ^sv
-    equals -contents-of test5.expected
+    equals -contents-of expected/shutdown-noop.txt

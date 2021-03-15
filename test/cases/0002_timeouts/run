@@ -14,7 +14,7 @@ then
   exit 1
 fi
 
-diff -u <(grep "^sv" test1.out) test1.expected
+diff -u <(grep "^sv" test1.out) expected/wait-started.txt
 
 
 export TIMEOUT_ACTION="CHECK"
@@ -25,7 +25,7 @@ then
   exit 1
 fi
 
-diff -u <(grep "^sv" test2.out) test2.expected
+diff -u <(grep "^sv" test2.out) expected/check.txt
 
 
 export TIMEOUT_ACTION="CLEANUP"
@@ -40,7 +40,7 @@ fi
 # First the initial cleanup fails causing a shutdown,
 # next the shutdown fails, causing a kill,
 # finally the kill fails, and we exit anyway.
-diff -u <(grep "^sv" test3.out) test3.expected
+diff -u <(grep "^sv" test3.out) expected/cleanup.txt
 
 
 export TIMEOUT_ACTION="SHUTDOWN"
@@ -52,7 +52,7 @@ sleep 1
 kill -SIGINT "$pid"
 wait
 
-diff -u <(grep "^sv" test4.out) test4.expected
+diff -u <(grep "^sv" test4.out) expected/shutdown.txt
 
 export SHUTDOWN_NOOP="yes"
 export TIMEOUT_ACTION="SHUTDOWN"
@@ -64,4 +64,4 @@ sleep 1
 kill -SIGINT "$pid"
 wait
 
-diff -u <(grep "^sv" test5.out) test5.expected
+diff -u <(grep "^sv" test5.out) expected/shutdown-noop.txt

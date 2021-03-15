@@ -21,4 +21,4 @@ exit-code == 0
 
 stdout
   -transformed-by grep ^sv
-    equals -contents-of test4.expected
+    equals -contents-of expected/shutdown.txt
