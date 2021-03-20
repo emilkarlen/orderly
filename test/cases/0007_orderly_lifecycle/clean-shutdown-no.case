@@ -4,7 +4,10 @@ env CLEAN_SHUTDOWN = no
 
 [act]
 
-orderly -max-start-tokens 2 -start-tokens-per-second 0 -all-lifecycle-hooks @[scripts]@/lifecycle -- -name sv -all-commands @[scripts]@/sv
+orderly -max-start-tokens 2 -start-tokens-per-second 0 \
+        -all-lifecycle-hooks @[scripts]@/lifecycle \
+	-- -name sv \
+	-all-commands @[scripts]@/sv
 
 [assert]
 

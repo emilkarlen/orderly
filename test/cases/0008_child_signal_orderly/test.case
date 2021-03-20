@@ -1,6 +1,8 @@
 [act]
 
-orderly -max-start-tokens 1 -start-tokens-per-second 0 -- -name sv -all-commands @[EXACTLY_HOME]@/sv
+orderly -max-start-tokens 1 -start-tokens-per-second 0 \
+        -- -name sv \
+	-all-commands @[EXACTLY_HOME]@/sv
 
 [assert]
 
