@@ -12,4 +12,5 @@ exit-code == 0
 
 stdout
   -transformed-by grep ^sv|^lifecycle
-    equals -contents-of test1.expected
+    equals -contents-of expected/clean-shutdown-yes.txt
+
